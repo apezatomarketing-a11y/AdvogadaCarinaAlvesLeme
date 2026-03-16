@@ -41,6 +41,7 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
+  const [modalContent, setModalContent] = useState<{ title: string; content: string } | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     whatsapp: "",
@@ -118,6 +119,39 @@ export default function Home() {
     });
   };
 
+  const openLegalModal = (type: 'terms' | 'privacy' | 'cookies') => {
+    const content = {
+      terms: {
+        title: "Termos de Uso",
+        content: `Estes Termos de Uso regem o acesso e a utilização do site da Advocacia Carina Alves Leme. Ao acessar este site, você concorda com as seguintes condições:
+
+1. Finalidade Informativa: O conteúdo deste site é meramente informativo e não constitui aconselhamento jurídico formal. A consulta a um advogado é indispensável para casos específicos.
+2. Propriedade Intelectual: Todo o conteúdo, logotipos e design são de propriedade exclusiva da Advocacia Carina Alves Leme, sendo proibida a reprodução sem autorização prévia.
+3. Responsabilidade: Não nos responsabilizamos por decisões tomadas com base exclusiva nas informações aqui contidas.
+4. Alterações: Reservamo-nos o direito de atualizar estes termos a qualquer momento, sem aviso prévio.`
+      },
+      privacy: {
+        title: "Política de Privacidade",
+        content: `Em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018), informamos como tratamos seus dados:
+
+1. Coleta de Dados: Coletamos dados fornecidos voluntariamente através de nossos formulários de contato (nome, WhatsApp, e-mail).
+2. Finalidade: Os dados são utilizados exclusivamente para responder às suas solicitações e realizar avaliações jurídicas preliminares.
+3. Armazenamento: Seus dados são armazenados em ambiente seguro e não são compartilhados com terceiros sem o seu consentimento expresso.
+4. Seus Direitos: Você tem o direito de solicitar a correção, exclusão ou acesso aos seus dados a qualquer momento através de nossos canais de contato.`
+      },
+      cookies: {
+        title: "Política de Cookies",
+        content: `Este site utiliza cookies para melhorar sua experiência de navegação:
+
+1. O que são cookies: Pequenos arquivos de texto armazenados no seu navegador para lembrar suas preferências.
+2. Tipos de Cookies: Utilizamos cookies essenciais para o funcionamento do site e cookies analíticos para entender como os usuários interagem com nosso conteúdo.
+3. Gerenciamento: Você pode desativar os cookies nas configurações do seu navegador, embora isso possa afetar algumas funcionalidades do site.
+4. Consentimento: Ao continuar navegando, você concorda com o uso de cookies conforme descrito nesta política.`
+      }
+    };
+    setModalContent(content[type]);
+  };
+
   return (
     <div className={`min-h-screen bg-background text-foreground ${theme === 'dark' ? 'dark' : ''} selection:bg-accent selection:text-accent-foreground`}>
       {/* Header/Navigation */}
@@ -125,7 +159,7 @@ export default function Home() {
         <div className="container flex items-center justify-between">
           <motion.button 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 hover-glow transition-all"
+            className="flex items-center gap-2 hover-glow transition-all logo-float"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             whileHover={{ scale: 1.05 }}
@@ -605,7 +639,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.05, rotate: 2 }}
               viewport={{ once: true }}
-              className="transition-transform"
+              className="transition-transform logo-float"
             >
               <img 
                 src="/logo-rodape.png" 
@@ -629,7 +663,7 @@ export default function Home() {
                   <li key={item.id}>
                     <button 
                       onClick={() => scrollToSection(item.id)} 
-                      className="footer-link"
+                      className="footer-nav-link"
                     >
                       {item.label}
                     </button>
@@ -677,19 +711,38 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-10 flex flex-col items-center gap-4 text-base md:text-lg text-muted-foreground font-bold text-center">
+          <div className="border-t border-white/10 pt-10 flex flex-col items-center gap-6 text-base md:text-lg text-muted-foreground font-bold text-center">
             <p>© 2024-2026 CARINA LEME ADVOCACIA. Todos os direitos reservados.</p>
-            <p>
-              Desenvolvido por{" "}
-              <a 
-                href="https://apezatomarketing.com.br" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-accent hover:underline transition-all"
-              >
-                Apezato Marketing
-              </a>
-            </p>
+            <div className="flex flex-col items-center gap-4">
+              <p>
+                Desenvolvido por{" "}
+                <motion.a 
+                  href="https://apezatomarketing.com.br" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline transition-all inline-block"
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  Apezato Marketing
+                </motion.a>
+              </p>
+              <div className="flex flex-wrap justify-center gap-4 mt-2">
+                {[
+                  { label: "Termos de Uso", type: 'terms' as const },
+                  { label: "Política de Privacidade", type: 'privacy' as const },
+                  { label: "Política de Cookies", type: 'cookies' as const }
+                ].map((item) => (
+                  <button
+                    key={item.type}
+                    onClick={() => openLegalModal(item.type)}
+                    className="px-4 py-1 border border-accent/30 rounded-full text-accent text-sm hover:bg-accent/10 transition-all"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </footer>
@@ -711,6 +764,44 @@ export default function Home() {
           />
         </div>
       </motion.a>
+
+      {/* Legal Modal */}
+      <AnimatePresence>
+        {modalContent && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/60 backdrop-blur-sm"
+            onClick={() => setModalContent(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="glass-dark max-w-2xl w-full max-h-[80vh] overflow-y-auto p-8 md:p-12 rounded-[2rem] border border-white/20 shadow-2xl relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setModalContent(null)}
+                className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all"
+              >
+                <X size={24} className="text-accent" />
+              </button>
+              <h2 className="text-3xl md:text-4xl font-black mb-8 text-accent uppercase tracking-tighter">{modalContent.title}</h2>
+              <div className="text-lg md:text-xl text-white/80 font-medium leading-relaxed whitespace-pre-line">
+                {modalContent.content}
+              </div>
+              <Button 
+                onClick={() => setModalContent(null)}
+                className="mt-10 w-full bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg font-black rounded-xl"
+              >
+                Entendido
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

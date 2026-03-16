@@ -168,18 +168,19 @@
     @apply absolute inset-0 rounded-full bg-green-500/40 animate-ping;
   }
 
-  /* Animação de linha no menu */
-  .menu-link {
+  /* Animação de linha no menu e rodapé */
+  .menu-link, .footer-nav-link {
     @apply relative py-2 transition-colors duration-300;
   }
 
-  .menu-link::after {
+  .menu-link::after, .footer-nav-link::after {
     content: '';
     @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-500;
   }
 
   .menu-link:hover::after,
-  .menu-link.active::after {
+  .menu-link.active::after,
+  .footer-nav-link:hover::after {
     @apply w-full;
   }
 
@@ -195,6 +196,11 @@
 
   .social-icon svg {
     @apply w-6 h-6 text-black;
+  }
+
+  /* Animação de flutuação para logotipo */
+  .logo-float:hover {
+    animation: float 2s ease-in-out infinite;
   }
 }
 
