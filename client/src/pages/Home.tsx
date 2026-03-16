@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Clock, Shield, BarChart3, Users, Phone, Mail, MapPin, Menu, X, Moon, Sun, Scale, Gavel, FileCheck, AlertTriangle, UserCheck } from "lucide-react";
+import { Clock, Shield, BarChart3, Users, Phone, Mail, MapPin, Menu, X, Moon, Sun, Scale, Gavel, FileCheck, AlertTriangle, UserCheck, Instagram, Facebook } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -40,6 +40,7 @@ export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio");
   const [formData, setFormData] = useState({
     name: "",
     whatsapp: "",
@@ -51,7 +52,21 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      
+      // Detect active section for menu underline
+      const sections = ["inicio", "servicos", "como-funciona", "diferenciais", "faq", "contato"];
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 150 && rect.bottom >= 150;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -109,10 +124,11 @@ export default function Home() {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-dark py-2' : 'bg-transparent py-6'}`}>
         <div className="container flex items-center justify-between">
           <motion.button 
-            onClick={() => scrollToSection("inicio")}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-2 hover-glow transition-all"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.8 }}
           >
             <img
@@ -135,10 +151,9 @@ export default function Home() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-sm font-bold uppercase tracking-widest hover:text-accent transition-all duration-300 relative group"
+                className={`text-sm font-bold uppercase tracking-widest menu-link ${activeSection === item.id ? 'active text-accent' : 'hover:text-accent'}`}
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-500 group-hover:w-full"></span>
               </button>
             ))}
           </nav>
@@ -192,7 +207,7 @@ export default function Home() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-lg font-bold hover:text-accent transition-colors text-left border-b border-white/5 pb-2"
+                  className={`text-lg font-bold transition-colors text-left border-b border-white/5 pb-2 ${activeSection === item.id ? 'text-accent' : 'hover:text-accent'}`}
                 >
                   {item.label}
                 </button>
@@ -234,7 +249,7 @@ export default function Home() {
                 </a>
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto text-lg md:text-xl h-16 px-10 border-accent/50 hover:bg-accent/10 hover-lift font-bold transition-all"
+                  className="w-full sm:w-auto text-lg md:text-xl h-16 px-10 border-accent/50 hover:bg-accent/10 hover-lift font-bold transition-all neon-button"
                   onClick={() => scrollToSection("servicos")}
                 >
                   Conhecer Serviços
@@ -585,11 +600,12 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col items-center text-center mb-20 space-y-10">
             <motion.button 
-              onClick={() => scrollToSection("inicio")}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05, rotate: 2 }}
               viewport={{ once: true }}
-              className="hover:scale-105 transition-transform"
+              className="transition-transform"
             >
               <img 
                 src="/logo-rodape.png" 
@@ -600,7 +616,7 @@ export default function Home() {
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl font-medium">Advocacia especializada em Direito de Trânsito com atendimento digital e presencial em todo o Brasil.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-20 text-center md:text-left">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 mb-20 text-center md:text-left">
             <div>
               <h3 className="text-xl md:text-2xl font-black mb-6 md:mb-8 text-accent uppercase tracking-widest">Navegação</h3>
               <ul className="space-y-4 text-lg md:text-xl text-muted-foreground font-bold">
@@ -613,7 +629,7 @@ export default function Home() {
                   <li key={item.id}>
                     <button 
                       onClick={() => scrollToSection(item.id)} 
-                      className="hover:text-accent transition-all duration-300 hover:translate-x-2"
+                      className="footer-link"
                     >
                       {item.label}
                     </button>
@@ -624,19 +640,40 @@ export default function Home() {
             <div>
               <h3 className="text-xl md:text-2xl font-black mb-6 md:mb-8 text-accent uppercase tracking-widest">Contato</h3>
               <ul className="space-y-4 text-lg md:text-xl text-muted-foreground font-bold">
-                <li>(17) 99609-1291</li>
-                <li>carinaleme.adv@hotmail.com</li>
-                <li>Ouroeste/SP</li>
+                <li className="footer-link">(17) 99609-1291</li>
+                <li className="footer-link">carinaleme.adv@hotmail.com</li>
+                <li className="footer-link">Ouroeste/SP</li>
               </ul>
             </div>
             <div>
               <h3 className="text-xl md:text-2xl font-black mb-6 md:mb-8 text-accent uppercase tracking-widest">Especialidades</h3>
               <ul className="space-y-4 text-lg md:text-xl text-muted-foreground font-bold">
-                <li>Recursos de Multas</li>
-                <li>Suspensão de CNH</li>
-                <li>Cassação de CNH</li>
-                <li>Crimes de Trânsito</li>
+                <li className="footer-link">Recursos de Multas</li>
+                <li className="footer-link">Suspensão de CNH</li>
+                <li className="footer-link">Cassação de CNH</li>
+                <li className="footer-link">Crimes de Trânsito</li>
               </ul>
+            </div>
+            <div>
+              <h3 className="text-xl md:text-2xl font-black mb-6 md:mb-8 text-accent uppercase tracking-widest">Redes Sociais</h3>
+              <div className="flex justify-center md:justify-start gap-6">
+                <a 
+                  href="https://www.instagram.com/adv.carinaleme?igsh=ejR3dnRja3BiYzUy" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                >
+                  <Instagram />
+                </a>
+                <a 
+                  href="https://www.facebook.com/share/1EQnA3viT3/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                >
+                  <Facebook />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -666,10 +703,12 @@ export default function Home() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <div className="w-16 h-16 md:w-20 md:h-20 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl border-2 border-white/20">
-          <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.255.949c-1.238.503-2.335 1.236-3.356 2.259-1.02 1.02-1.756 2.117-2.259 3.355-.606 1.605-.949 3.362-.949 5.209 0 .891.057 1.789.169 2.674l-1.195 4.374c-.713 2.636.26 4.123 1.884 4.123.779 0 1.496-.19 2.23-.558l4.332-1.352c.955.201 1.93.3 2.945.3 5.048 0 9.14-4.092 9.14-9.14 0-2.437-.944-4.73-2.665-6.452-1.72-1.72-4.015-2.665-6.452-2.665" />
-          </svg>
+        <div className="w-16 h-16 md:w-20 md:h-20 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl border-2 border-white/20 overflow-hidden">
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+            alt="WhatsApp" 
+            className="w-10 h-10 md:w-12 md:h-12"
+          />
         </div>
       </motion.a>
     </div>
