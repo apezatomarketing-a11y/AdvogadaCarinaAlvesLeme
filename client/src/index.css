@@ -18,7 +18,7 @@
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.75 0.15 45); /* Dourado */
+  --accent: oklch(0.75 0.15 45); /* Dourado Real */
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
@@ -41,7 +41,7 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.15 0 0);
   --muted-foreground: oklch(0.706 0 0);
-  --accent: oklch(0.75 0.15 45); /* Dourado */
+  --accent: oklch(0.75 0.15 45); /* Dourado Real */
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
@@ -99,16 +99,36 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-accent via-yellow-200 to-accent animate-gradient-x;
   }
 
+  /* Botão com animação de flutuação e brilho neon dourado */
+  .neon-button {
+    @apply relative overflow-hidden transition-all duration-500 animate-float;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .neon-button:hover {
+    @apply -translate-y-2;
+    box-shadow: 0 0 25px rgba(184, 134, 11, 0.6), 0 0 50px rgba(184, 134, 11, 0.3);
+  }
+
+  .neon-button::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full skew-x-12 transition-transform duration-700;
+  }
+
+  .neon-button:hover::after {
+    @apply translate-x-full;
+  }
+
   .skeu-button {
     @apply shadow-[0_4px_0_0_rgba(0,0,0,0.2),inset_0_1px_0_0_rgba(255,255,255,0.3)] active:shadow-none active:translate-y-[2px] transition-all duration-150;
   }
 
   .hover-glow {
-    @apply hover:shadow-[0_0_20px_rgba(184,134,11,0.4)] transition-all duration-300;
+    @apply hover:shadow-[0_0_30px_rgba(184,134,11,0.5)] transition-all duration-500;
   }
 
   .hover-lift {
-    @apply hover:-translate-y-1 transition-transform duration-300;
+    @apply hover:-translate-y-2 transition-transform duration-500;
   }
 
   .pulse-ring {
@@ -126,43 +146,52 @@
   50% { background-position: 100% 50%; }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 .animate-gradient-x {
   background-size: 200% 200%;
   animation: gradient-x 5s ease infinite;
 }
 
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
 .slide-up {
-  animation: slideUp 0.8s ease-out forwards;
+  animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(50px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .slide-in-left {
-  animation: slideInLeft 0.8s ease-out forwards;
+  animation: slideInLeft 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-50px); }
+  from { opacity: 0; transform: translateX(-80px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
 .slide-in-right {
-  animation: slideInRight 0.8s ease-out forwards;
+  animation: slideInRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(50px); }
+  from { opacity: 0; transform: translateX(80px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
 .scale-in {
-  animation: scaleIn 0.6s ease-out forwards;
+  animation: scaleIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.9); }
+  from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
 }

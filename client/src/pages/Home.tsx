@@ -21,15 +21,15 @@ const formatWhatsAppMessage = (data: any) => {
 };
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 50 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.6, ease: "easeOut" }
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
 };
 
 const staggerContainer = {
   initial: {},
-  whileInView: { transition: { staggerChildren: 0.1 } },
+  whileInView: { transition: { staggerChildren: 0.15 } },
   viewport: { once: true }
 };
 
@@ -94,54 +94,55 @@ export default function Home() {
   return (
     <div className={`min-h-screen bg-background text-foreground ${theme === 'dark' ? 'dark' : ''}`}>
       {/* Header/Navigation */}
-      <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? 'glass-dark py-2' : 'bg-transparent py-4'}`}>
+      <header className={`sticky top-0 z-50 transition-all duration-500 ${scrolled ? 'glass-dark py-2' : 'bg-transparent py-6'}`}>
         <div className="container flex items-center justify-between">
           <motion.a 
             href="#inicio" 
             className="flex items-center gap-2 hover-glow"
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
           >
             <img
               src="/logo-menu.png"
               alt="Advocacia Carina Alves Leme"
-              className="h-12 w-auto"
+              className="h-14 w-auto"
             />
           </motion.a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {["Início", "Serviços", "Como Funciona", "Diferenciais", "FAQ", "Contato"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase().replace(" ", "-"))}
-                className="text-sm font-medium hover:text-accent transition-all duration-300 relative group"
+                className="text-sm font-bold uppercase tracking-widest hover:text-accent transition-all duration-300 relative group"
               >
                 {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-accent transition-all duration-500 group-hover:w-full"></span>
               </button>
             ))}
           </nav>
 
           {/* Theme Toggle & CTA */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-full glass hover:bg-accent/20 transition-all duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              className="p-3 rounded-full glass hover:bg-accent/20 transition-all duration-500"
+              whileHover={{ scale: 1.2, rotate: 180 }}
+              whileTap={{ scale: 0.8 }}
             >
-              {theme === "dark" ? <Sun size={20} className="text-accent" /> : <Moon size={20} className="text-accent" />}
+              {theme === "dark" ? <Sun size={22} className="text-accent" /> : <Moon size={22} className="text-accent" />}
             </motion.button>
 
             <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="hidden md:block">
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground skeu-button font-bold">
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground neon-button skeu-button font-black px-8 h-12">
                 Falar no WhatsApp
               </Button>
             </a>
 
             <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -150,22 +151,22 @@ export default function Home() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.nav 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden glass-dark mt-2 p-4 flex flex-col gap-4 overflow-hidden"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="md:hidden glass-dark mt-4 p-6 flex flex-col gap-6 overflow-hidden rounded-2xl mx-4"
             >
               {["Início", "Serviços", "Como Funciona", "Diferenciais", "FAQ", "Contato"].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase().replace(" ", "-"))}
-                  className="text-sm font-medium hover:text-accent transition-colors text-left py-2"
+                  className="text-lg font-bold hover:text-accent transition-colors text-left border-b border-white/5 pb-2"
                 >
                   {item}
                 </button>
               ))}
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground skeu-button">
+                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground neon-button skeu-button font-black h-14">
                   Falar no WhatsApp
                 </Button>
               </a>
@@ -175,33 +176,33 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section id="inicio" className="relative pt-20 pb-32 md:pt-32 md:pb-48 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(184,134,11,0.1),transparent_50%)]"></div>
+      <section id="inicio" className="relative pt-24 pb-40 md:pt-40 md:pb-60 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(184,134,11,0.15),transparent_60%)]"></div>
         <div className="container relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-20 items-center">
             <motion.div 
-              className="space-y-8"
-              initial={{ opacity: 0, x: -50 }}
+              className="space-y-10"
+              initial={{ opacity: 0, x: -80 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+              <h1 className="text-6xl md:text-8xl font-black leading-[1.1] tracking-tighter">
                 <span className="block">Soluções jurídicas para a</span>
                 <span className="gradient-text">nulidade de infrações</span>
               </h1>
-              <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Defesa de multas, regularização de CNH, análise de infrações e revisão de cobranças de seguros e juros. Protegemos seus direitos com suporte especializado.
+              <p className="text-2xl text-muted-foreground max-w-xl leading-relaxed font-medium">
+                Defesa de multas, regularização de CNH e análise de infrações. Protegemos seus direitos com suporte jurídico de elite.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row gap-8">
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                  <Button className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground text-lg h-14 px-8 skeu-button font-bold">
+                  <Button className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground text-xl h-16 px-10 neon-button skeu-button font-black">
                     Avaliar Meu Caso
                   </Button>
                 </a>
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto text-lg h-14 px-8 border-accent/50 hover:bg-accent/10 hover-lift"
+                  className="w-full sm:w-auto text-xl h-16 px-10 border-accent/50 hover:bg-accent/10 hover-lift font-bold"
                   onClick={() => scrollToSection("servicos")}
                 >
                   Conhecer Serviços
@@ -210,31 +211,35 @@ export default function Home() {
             </motion.div>
             <motion.div 
               className="relative"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.7, rotate: 5 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="glass p-4 rounded-2xl rotate-3 hover:rotate-0 transition-transform duration-500 shadow-2xl">
+              <div className="glass p-6 rounded-[2.5rem] rotate-6 hover:rotate-0 transition-all duration-700 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
                 <img
                   src="/foto-inicio.jpeg"
                   alt="Advocacia"
-                  className="rounded-xl w-full h-auto shadow-inner"
+                  className="rounded-[2rem] w-full h-auto shadow-inner"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 glass p-6 rounded-xl hidden md:block animate-bounce" style={{ animationDuration: '3s' }}>
-                <Scale className="text-accent w-10 h-10" />
-              </div>
+              <motion.div 
+                className="absolute -bottom-10 -left-10 glass p-8 rounded-3xl hidden md:block shadow-2xl"
+                animate={{ y: [0, -20, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Scale className="text-accent w-14 h-14" />
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-accent/5 border-y border-accent/10">
+      <section className="py-24 bg-accent/5 border-y border-accent/10">
         <div className="container">
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-12"
             variants={staggerContainer}
             initial="initial"
             whileInView="whileInView"
@@ -245,10 +250,12 @@ export default function Home() {
               { title: "Pontos somando?", desc: "Estratégias legais para evitar suspensão e proteger seu direito de dirigir.", icon: BarChart3 },
               { title: "Prazo correndo?", desc: "Protocolos dentro dos prazos do DETRAN/CONTRAN, com prioridade total.", icon: Clock },
             ].map((stat, i) => (
-              <motion.div key={i} variants={fadeInUp} className="glass p-8 rounded-2xl text-center hover-glow hover-lift">
-                <stat.icon className="w-12 h-12 text-accent mx-auto mb-4" />
-                <h3 className="text-2xl font-bold mb-2">{stat.title}</h3>
-                <p className="text-muted-foreground">{stat.desc}</p>
+              <motion.div key={i} variants={fadeInUp} className="glass p-10 rounded-[2rem] text-center hover-glow hover-lift group">
+                <div className="w-20 h-20 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:bg-accent transition-colors duration-500">
+                  <stat.icon className="w-10 h-10 text-accent group-hover:text-accent-foreground transition-colors duration-500" />
+                </div>
+                <h3 className="text-3xl font-black mb-4">{stat.title}</h3>
+                <p className="text-xl text-muted-foreground font-medium">{stat.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -256,20 +263,20 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="servicos" className="py-24 md:py-32">
+      <section id="servicos" className="py-32 md:py-48">
         <div className="container">
           <motion.div 
-            className="text-center mb-20"
+            className="text-center mb-24"
             {...fadeInUp}
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">Nossos Serviços</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Atuação especializada em todas as áreas do Direito de Trânsito com foco em resultados.
+            <h2 className="text-5xl md:text-8xl font-black mb-8 gradient-text">Nossos Serviços</h2>
+            <p className="text-2xl text-muted-foreground max-w-3xl mx-auto font-medium">
+              Atuação especializada em todas as áreas do Direito de Trânsito com foco em resultados de elite.
             </p>
           </motion.div>
 
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-10"
             variants={staggerContainer}
             initial="initial"
             whileInView="whileInView"
@@ -283,11 +290,12 @@ export default function Home() {
               { title: "Crimes de Trânsito", icon: AlertTriangle },
               { title: "Transferência de Pontos", icon: Users },
             ].map((service, i) => (
-              <motion.div key={i} variants={fadeInUp} className="glass p-8 rounded-2xl group hover:bg-accent/10 transition-all duration-500">
-                <service.icon className="w-14 h-14 text-accent mb-6 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
+              <motion.div key={i} variants={fadeInUp} className="glass p-10 rounded-[2rem] group hover:bg-accent/10 transition-all duration-700 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-bl-full -mr-10 -mt-10 group-hover:bg-accent/20 transition-all duration-700"></div>
+                <service.icon className="w-16 h-16 text-accent mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
+                <h3 className="text-3xl font-black mb-6">{service.title}</h3>
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                  <Button variant="link" className="text-accent p-0 h-auto font-bold hover:translate-x-2 transition-transform">
+                  <Button variant="link" className="text-accent p-0 h-auto text-xl font-black hover:translate-x-4 transition-all duration-500">
                     Fale comigo! →
                   </Button>
                 </a>
@@ -298,52 +306,58 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-24 md:py-32 bg-card/50 relative overflow-hidden">
+      <section className="py-32 md:py-48 bg-card/50 relative overflow-hidden">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-24 items-center">
             <motion.div 
               className="relative"
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 1 }}
             >
-              <div className="glass p-4 rounded-2xl -rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="glass p-6 rounded-[3rem] -rotate-6 hover:rotate-0 transition-all duration-1000 shadow-2xl">
                 <img
                   src="/foto-sobre.jpeg"
                   alt="Dra. Carina Leme"
-                  className="rounded-xl w-full h-auto"
+                  className="rounded-[2.5rem] w-full h-auto"
                 />
               </div>
-              <div className="absolute -top-8 -right-8 glass p-6 rounded-full animate-pulse">
-                <UserCheck className="text-accent w-12 h-12" />
-              </div>
+              <motion.div 
+                className="absolute -top-12 -right-12 glass p-10 rounded-full shadow-2xl"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <UserCheck className="text-accent w-16 h-16" />
+              </motion.div>
             </motion.div>
             <motion.div 
-              className="space-y-8"
-              initial={{ opacity: 0, x: 50 }}
+              className="space-y-10"
+              initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 1 }}
             >
-              <h2 className="text-4xl md:text-6xl font-bold gradient-text">Dra. Carina Leme</h2>
-              <p className="text-2xl font-semibold text-accent">OAB/SP 472.156</p>
-              <div className="space-y-6 text-lg text-muted-foreground">
-                <p>Graduada em Direito com especialização em Direito de Trânsito, com centenas de casos solucionados com sucesso.</p>
-                <ul className="space-y-4">
+              <h2 className="text-5xl md:text-8xl font-black gradient-text">Dra. Carina Leme</h2>
+              <p className="text-3xl font-black text-accent tracking-widest">OAB/SP 472.156</p>
+              <div className="space-y-8 text-2xl text-muted-foreground font-medium">
+                <p>Graduada em Direito com especialização em Direito de Trânsito, com centenas de casos solucionados com sucesso em todo o território nacional.</p>
+                <ul className="space-y-6">
                   {[
                     "Especialista em Recursos de Multas",
                     "Defesa em Suspensão e Cassação de CNH",
                     "Atuação em Crimes de Trânsito",
                     "Atendimento Digital e Presencial"
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent rounded-full"></div>
+                    <li key={i} className="flex items-center gap-5">
+                      <div className="w-4 h-4 bg-accent rounded-full shadow-[0_0_15px_rgba(184,134,11,0.8)]"></div>
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
               <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground h-14 px-8 skeu-button font-bold">
+                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground h-16 px-12 neon-button skeu-button font-black text-xl">
                   Falar com Advogada
                 </Button>
               </a>
@@ -353,15 +367,15 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 md:py-32">
-        <div className="container max-w-4xl">
-          <motion.div className="text-center mb-16" {...fadeInUp}>
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">Dúvidas Frequentes</h2>
-            <p className="text-xl text-muted-foreground">Esclarecemos as principais questões sobre seus direitos no trânsito.</p>
+      <section id="faq" className="py-32 md:py-48">
+        <div className="container max-w-5xl">
+          <motion.div className="text-center mb-24" {...fadeInUp}>
+            <h2 className="text-5xl md:text-8xl font-black mb-8 gradient-text">Dúvidas Frequentes</h2>
+            <p className="text-2xl text-muted-foreground font-medium">Esclarecemos as principais questões sobre seus direitos no trânsito.</p>
           </motion.div>
 
           <motion.div variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }}>
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-6">
               {[
                 { q: "Perdi o prazo, ainda dá tempo?", a: "Depende da fase do processo. Analiso o caso e verifico alternativas cabíveis para reverter a situação." },
                 { q: "A recusa ao bafômetro sempre gera multa?", a: "A autuação existe, mas cada caso exige análise minuciosa dos procedimentos adotados pelo agente." },
@@ -370,11 +384,11 @@ export default function Home() {
                 { q: "Quanto custa?", a: "Os honorários são definidos após a avaliação da complexidade do seu caso específico." },
                 { q: "Quais documentos enviar?", a: "Auto de infração, CNH e um breve relato do ocorrido são suficientes para começar." },
               ].map((item, i) => (
-                <AccordionItem key={i} value={`item-${i}`} className="glass px-6 rounded-xl border-none">
-                  <AccordionTrigger className="text-lg font-bold hover:text-accent transition-colors py-6">
+                <AccordionItem key={i} value={`item-${i}`} className="glass px-10 rounded-[2rem] border-none shadow-lg hover:shadow-accent/5 transition-all duration-500">
+                  <AccordionTrigger className="text-2xl font-black hover:text-accent transition-colors py-8 text-left">
                     {item.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground text-lg pb-6">
+                  <AccordionContent className="text-muted-foreground text-xl font-medium pb-8 leading-relaxed">
                     {item.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -385,76 +399,66 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contato" className="py-24 md:py-32 bg-accent/5">
+      <section id="contato" className="py-32 md:py-48 bg-accent/5">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-16">
+          <div className="grid md:grid-cols-2 gap-24">
             <motion.div 
-              className="space-y-12"
-              initial={{ opacity: 0, x: -50 }}
+              className="space-y-16"
+              initial={{ opacity: 0, x: -80 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 1 }}
             >
               <div>
-                <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">Entre em Contato</h2>
-                <p className="text-xl text-muted-foreground">Receba sua avaliação jurídica gratuita em até 1h comercial.</p>
+                <h2 className="text-5xl md:text-8xl font-black mb-8 gradient-text">Entre em Contato</h2>
+                <p className="text-2xl text-muted-foreground font-medium">Receba sua avaliação jurídica gratuita em até 1h comercial.</p>
               </div>
               
-              <div className="space-y-8">
-                <div className="flex items-center gap-6 group">
-                  <div className="w-14 h-14 glass rounded-full flex items-center justify-center group-hover:bg-accent transition-colors">
-                    <Phone className="text-accent group-hover:text-accent-foreground" />
+              <div className="space-y-10">
+                {[
+                  { icon: Phone, label: "WhatsApp", value: "(17) 99609-1291" },
+                  { icon: Mail, label: "E-mail", value: "carinaleme.adv@gmail.com" },
+                  { icon: MapPin, label: "Endereço", value: "AV DOS BANDEIRANTES, 2170, OUROESTE - SP" },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-8 group">
+                    <div className="w-20 h-20 glass rounded-3xl flex items-center justify-center group-hover:bg-accent transition-all duration-500 shadow-xl">
+                      <item.icon className="w-10 h-10 text-accent group-hover:text-accent-foreground transition-all duration-500" />
+                    </div>
+                    <div>
+                      <p className="text-lg text-muted-foreground font-bold uppercase tracking-widest">{item.label}</p>
+                      <p className="text-2xl font-black">{item.value}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">WhatsApp</p>
-                    <p className="text-xl font-bold">(17) 99609-1291</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-6 group">
-                  <div className="w-14 h-14 glass rounded-full flex items-center justify-center group-hover:bg-accent transition-colors">
-                    <Mail className="text-accent group-hover:text-accent-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">E-mail</p>
-                    <p className="text-xl font-bold">carinaleme.adv@gmail.com</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-6 group">
-                  <div className="w-14 h-14 glass rounded-full flex items-center justify-center group-hover:bg-accent transition-colors">
-                    <MapPin className="text-accent group-hover:text-accent-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Endereço</p>
-                    <p className="text-xl font-bold">AV DOS BANDEIRANTES, 2170, OUROESTE - SP</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </motion.div>
 
             <motion.div 
-              className="glass p-8 md:p-12 rounded-3xl shadow-2xl"
-              initial={{ opacity: 0, x: 50 }}
+              className="glass p-10 md:p-16 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]"
+              initial={{ opacity: 0, x: 80 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 1 }}
             >
-              <form onSubmit={handleFormSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Nome *</Label>
-                    <Input id="name" name="name" value={formData.name} onChange={handleFormChange} required className="bg-white/5 border-white/10 h-12" />
+              <form onSubmit={handleFormSubmit} className="space-y-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <Label htmlFor="name" className="text-lg font-bold">Nome *</Label>
+                    <Input id="name" name="name" value={formData.name} onChange={handleFormChange} required className="bg-white/5 border-white/10 h-14 text-lg rounded-xl focus:ring-accent" />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="whatsapp">WhatsApp *</Label>
-                    <Input id="whatsapp" name="whatsapp" value={formData.whatsapp} onChange={handleFormChange} required className="bg-white/5 border-white/10 h-12" />
+                  <div className="space-y-3">
+                    <Label htmlFor="whatsapp" className="text-lg font-bold">WhatsApp *</Label>
+                    <Input id="whatsapp" name="whatsapp" value={formData.whatsapp} onChange={handleFormChange} required className="bg-white/5 border-white/10 h-14 text-lg rounded-xl focus:ring-accent" />
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">E-mail</Label>
-                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleFormChange} className="bg-white/5 border-white/10 h-12" />
+                <div className="space-y-3">
+                  <Label htmlFor="email" className="text-lg font-bold">E-mail</Label>
+                  <Input id="email" name="email" type="email" value={formData.email} onChange={handleFormChange} className="bg-white/5 border-white/10 h-14 text-lg rounded-xl focus:ring-accent" />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="situation">Situação</Label>
+                <div className="space-y-3">
+                  <Label htmlFor="situation" className="text-lg font-bold">Situação</Label>
                   <Select value={formData.situation} onValueChange={(v) => setFormData(p => ({ ...p, situation: v }))}>
-                    <SelectTrigger className="bg-white/5 border-white/10 h-12">
+                    <SelectTrigger className="bg-white/5 border-white/10 h-14 text-lg rounded-xl">
                       <SelectValue placeholder="Selecione sua situação" />
                     </SelectTrigger>
                     <SelectContent>
@@ -464,15 +468,15 @@ export default function Home() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Mensagem</Label>
-                  <Textarea id="message" name="message" value={formData.message} onChange={handleFormChange} className="bg-white/5 border-white/10 min-h-[120px]" />
+                <div className="space-y-3">
+                  <Label htmlFor="message" className="text-lg font-bold">Mensagem</Label>
+                  <Textarea id="message" name="message" value={formData.message} onChange={handleFormChange} className="bg-white/5 border-white/10 min-h-[150px] text-lg rounded-xl focus:ring-accent" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <Checkbox id="authorized" checked={formData.authorized} onCheckedChange={(c) => setFormData(p => ({ ...p, authorized: c as boolean }))} />
-                  <Label htmlFor="authorized" className="text-sm cursor-pointer text-muted-foreground">Autorizo o uso dos meus dados para contato e avaliação *</Label>
+                <div className="flex items-center gap-4">
+                  <Checkbox id="authorized" checked={formData.authorized} onCheckedChange={(c) => setFormData(p => ({ ...p, authorized: c as boolean }))} className="w-6 h-6 border-accent" />
+                  <Label htmlFor="authorized" className="text-base cursor-pointer text-muted-foreground font-medium">Autorizo o uso dos meus dados para contato e avaliação *</Label>
                 </div>
-                <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg skeu-button font-bold">
+                <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground h-16 text-xl neon-button skeu-button font-black">
                   Enviar e Falar no WhatsApp
                 </Button>
               </form>
@@ -482,32 +486,40 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-white/10 py-20">
+      <footer className="bg-card border-t border-white/10 py-32">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div className="space-y-6">
-              <img src="/logo-rodape.png" alt="Logo" className="h-16 w-auto" />
-              <p className="text-muted-foreground">Advocacia especializada em Direito de Trânsito com atendimento digital e presencial em todo o Brasil.</p>
-            </div>
+          <div className="flex flex-col items-center text-center mb-24 space-y-12">
+            <motion.img 
+              src="/logo-rodape.png" 
+              alt="Logo" 
+              className="h-32 md:h-48 w-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            />
+            <p className="text-2xl text-muted-foreground max-w-2xl font-medium">Advocacia especializada em Direito de Trânsito com atendimento digital e presencial em todo o Brasil.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-24 text-center md:text-left">
             <div>
-              <h3 className="text-xl font-bold mb-6 text-accent">Navegação</h3>
-              <ul className="space-y-4 text-muted-foreground">
+              <h3 className="text-2xl font-black mb-8 text-accent uppercase tracking-widest">Navegação</h3>
+              <ul className="space-y-6 text-xl text-muted-foreground font-bold">
                 {["Início", "Serviços", "Como Funciona", "FAQ"].map(item => (
-                  <li key={item}><button onClick={() => scrollToSection(item.toLowerCase().replace(" ", "-"))} className="hover:text-accent transition-colors">{item}</button></li>
+                  <li key={item}><button onClick={() => scrollToSection(item.toLowerCase().replace(" ", "-"))} className="hover:text-accent transition-all duration-300 hover:translate-x-2">{item}</button></li>
                 ))}
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-bold mb-6 text-accent">Contato</h3>
-              <ul className="space-y-4 text-muted-foreground">
+              <h3 className="text-2xl font-black mb-8 text-accent uppercase tracking-widest">Contato</h3>
+              <ul className="space-y-6 text-xl text-muted-foreground font-bold">
                 <li>(17) 99609-1291</li>
                 <li>carinaleme.adv@gmail.com</li>
                 <li>Ouroeste/SP</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-bold mb-6 text-accent">Especialidades</h3>
-              <ul className="space-y-4 text-muted-foreground">
+              <h3 className="text-2xl font-black mb-8 text-accent uppercase tracking-widest">Especialidades</h3>
+              <ul className="space-y-6 text-xl text-muted-foreground font-bold">
                 <li>Recursos de Multas</li>
                 <li>Suspensão de CNH</li>
                 <li>Cassação de CNH</li>
@@ -515,9 +527,20 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
+
+          <div className="border-t border-white/10 pt-12 flex flex-col items-center gap-6 text-lg text-muted-foreground font-bold text-center">
             <p>© 2024-2026 CARINA LEME ADVOCACIA. Todos os direitos reservados.</p>
-            <p>Desenvolvido por Apezato Marketing</p>
+            <p>
+              Desenvolvido por{" "}
+              <a 
+                href="https://apezatomarketing.com.br" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-accent hover:underline transition-all"
+              >
+                Apezato Marketing
+              </a>
+            </p>
           </div>
         </div>
       </footer>
@@ -527,12 +550,12 @@ export default function Home() {
         href={WHATSAPP_LINK}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 z-50 pulse-ring"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-10 right-10 z-50 pulse-ring"
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.8 }}
       >
-        <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-2xl skeu-button">
-          <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(34,197,94,0.5)] skeu-button">
+          <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.255.949c-1.238.503-2.335 1.236-3.356 2.259-1.02 1.02-1.756 2.117-2.259 3.355-.606 1.605-.949 3.362-.949 5.209 0 .891.057 1.789.169 2.674l-1.195 4.374c-.713 2.636.26 4.123 1.884 4.123.779 0 1.496-.19 2.23-.558l4.332-1.352c.955.201 1.93.3 2.945.3 5.048 0 9.14-4.092 9.14-9.14 0-2.437-.944-4.73-2.665-6.452-1.72-1.72-4.015-2.665-6.452-2.665" />
           </svg>
         </div>
