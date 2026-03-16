@@ -159,7 +159,7 @@ export default function Home() {
         <div className="container flex items-center justify-between">
           <motion.button 
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 hover-glow transition-all logo-float"
+            className="flex items-center gap-2 hover-glow transition-all logo-float cursor-pointer"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             whileHover={{ scale: 1.05 }}
@@ -185,7 +185,7 @@ export default function Home() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-bold uppercase tracking-widest menu-link ${activeSection === item.id ? 'active text-accent' : 'hover:text-accent'}`}
+                className={`text-sm font-bold uppercase tracking-widest menu-link cursor-pointer ${activeSection === item.id ? 'active text-accent' : 'hover:text-accent'}`}
               >
                 {item.label}
               </button>
@@ -196,7 +196,7 @@ export default function Home() {
           <div className="flex items-center gap-4 md:gap-6">
             <motion.button
               onClick={toggleTheme}
-              className="p-2 md:p-3 rounded-full glass hover:bg-accent/20 transition-all duration-500"
+              className="p-2 md:p-3 rounded-full glass hover:bg-accent/20 transition-all duration-500 cursor-pointer"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               title="Alternar tema"
@@ -208,14 +208,14 @@ export default function Home() {
               href={getWhatsAppLink("Olá Dra. Carina, vim através do site e gostaria de uma consultoria jurídica.")} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="hidden md:block"
+              className="hidden md:block cursor-pointer"
             >
-              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground neon-button skeu-button font-black px-6 h-12">
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground neon-button skeu-button font-black px-6 h-12 cursor-pointer">
                 Falar no WhatsApp
               </Button>
             </a>
 
-            <button className="md:hidden p-2 glass rounded-lg" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button className="md:hidden p-2 glass rounded-lg cursor-pointer" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -241,13 +241,13 @@ export default function Home() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-lg font-bold transition-colors text-left border-b border-white/5 pb-2 ${activeSection === item.id ? 'text-accent' : 'hover:text-accent'}`}
+                  className={`text-lg font-bold transition-colors text-left border-b border-white/5 pb-2 cursor-pointer ${activeSection === item.id ? 'text-accent' : 'hover:text-accent'}`}
                 >
                   {item.label}
                 </button>
               ))}
-              <a href={getWhatsAppLink("Olá Dra. Carina, vim através do site e gostaria de uma consultoria jurídica.")} target="_blank" rel="noopener noreferrer">
-                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground neon-button skeu-button font-black h-14 mt-2">
+              <a href={getWhatsAppLink("Olá Dra. Carina, vim através do site e gostaria de uma consultoria jurídica.")} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground neon-button skeu-button font-black h-14 mt-2 cursor-pointer">
                   Falar no WhatsApp
                 </Button>
               </a>
@@ -276,14 +276,14 @@ export default function Home() {
                 Defesa de multas, regularização de CNH e análise de infrações. Protegemos seus direitos com suporte jurídico de elite.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                <a href={getWhatsAppLink("Olá Dra. Carina, gostaria de uma avaliação gratuita do meu caso de trânsito.")} target="_blank" rel="noopener noreferrer">
-                  <Button className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground text-lg md:text-xl h-16 px-10 neon-button skeu-button font-black">
+                <a href={getWhatsAppLink("Olá Dra. Carina, gostaria de uma avaliação gratuita do meu caso de trânsito.")} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                  <Button className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground text-lg md:text-xl h-16 px-10 neon-button skeu-button font-black cursor-pointer">
                     Avaliar Meu Caso
                   </Button>
                 </a>
                 <Button
                   variant="outline"
-                  className="w-full sm:w-auto text-lg md:text-xl h-16 px-10 border-accent/50 hover:bg-accent/10 hover-lift font-bold transition-all neon-button"
+                  className="w-full sm:w-auto text-lg md:text-xl h-16 px-10 border-accent/50 hover:bg-accent/10 hover-lift font-bold transition-all neon-button cursor-pointer"
                   onClick={() => scrollToSection("servicos")}
                 >
                   Conhecer Serviços
@@ -386,8 +386,8 @@ export default function Home() {
                   <service.icon className="w-12 h-12 md:w-16 md:h-16 text-accent mb-6 md:mb-8 transition-all duration-500" />
                 </motion.div>
                 <h3 className="text-2xl md:text-3xl font-black mb-6">{service.title}</h3>
-                <a href={getWhatsAppLink(service.msg)} target="_blank" rel="noopener noreferrer">
-                  <Button className="bg-accent/10 hover:bg-accent text-accent hover:text-accent-foreground neon-button skeu-button font-black w-full h-14 text-lg transition-all">
+                <a href={getWhatsAppLink(service.msg)} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                  <Button className="bg-accent/10 hover:bg-accent text-accent hover:text-accent-foreground neon-button skeu-button font-black w-full h-14 text-lg transition-all cursor-pointer">
                     {service.btn}
                   </Button>
                 </a>
@@ -472,8 +472,8 @@ export default function Home() {
                   ))}
                 </ul>
               </div>
-              <a href={getWhatsAppLink("Olá Dra. Carina, gostaria de agendar uma consulta jurídica.")} target="_blank" rel="noopener noreferrer">
-                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground h-16 px-10 neon-button skeu-button font-black text-xl transition-all">
+              <a href={getWhatsAppLink("Olá Dra. Carina, gostaria de agendar uma consulta jurídica.")} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                <Button className="bg-accent hover:bg-accent/90 text-accent-foreground h-16 px-10 neon-button skeu-button font-black text-xl transition-all cursor-pointer">
                   Falar com Advogada
                 </Button>
               </a>
@@ -501,7 +501,7 @@ export default function Home() {
                 { q: "Quais documentos enviar?", a: "Auto de infração, CNH e um breve relato do ocorrido são suficientes para começar." },
               ].map((item, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="glass px-6 md:px-10 rounded-2xl border border-white/10 shadow-lg hover:border-accent/30 transition-all duration-500">
-                  <AccordionTrigger className="text-xl md:text-2xl font-black hover:text-accent transition-colors py-6 text-left">
+                  <AccordionTrigger className="text-xl md:text-2xl font-black hover:text-accent transition-colors py-6 text-left cursor-pointer">
                     {item.q}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-lg md:text-xl font-medium pb-6 leading-relaxed">
@@ -575,12 +575,12 @@ export default function Home() {
                 <div className="space-y-2">
                   <Label htmlFor="situation" className="text-base font-bold">Situação</Label>
                   <Select value={formData.situation} onValueChange={(v) => setFormData(p => ({ ...p, situation: v }))}>
-                    <SelectTrigger className="bg-white/5 border-white/10 h-14 text-lg rounded-xl">
+                    <SelectTrigger className="bg-white/5 border-white/10 h-14 text-lg rounded-xl cursor-pointer">
                       <SelectValue placeholder="Selecione sua situação" />
                     </SelectTrigger>
                     <SelectContent>
                       {["Multa", "Pontos", "Suspensão", "Cassação", "Outro"].map(s => (
-                        <SelectItem key={s} value={s.toLowerCase()}>{s}</SelectItem>
+                        <SelectItem key={s} value={s.toLowerCase()} className="cursor-pointer">{s}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -590,10 +590,10 @@ export default function Home() {
                   <Textarea id="message" name="message" value={formData.message} onChange={handleFormChange} className="bg-white/5 border-white/10 min-h-[120px] text-lg rounded-xl focus:ring-accent" />
                 </div>
                 <div className="flex items-center gap-3">
-                  <Checkbox id="authorized" checked={formData.authorized} onCheckedChange={(c) => setFormData(p => ({ ...p, authorized: c as boolean }))} className="w-5 h-5 border-accent" />
+                  <Checkbox id="authorized" checked={formData.authorized} onCheckedChange={(c) => setFormData(p => ({ ...p, authorized: c as boolean }))} className="w-5 h-5 border-accent cursor-pointer" />
                   <Label htmlFor="authorized" className="text-sm cursor-pointer text-muted-foreground font-medium">Autorizo o uso dos meus dados para contato e avaliação *</Label>
                 </div>
-                <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground h-16 text-xl neon-button skeu-button font-black transition-all">
+                <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground h-16 text-xl neon-button skeu-button font-black transition-all cursor-pointer">
                   Enviar e Falar no WhatsApp
                 </Button>
               </form>
@@ -639,12 +639,12 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ scale: 1.05, rotate: 2 }}
               viewport={{ once: true }}
-              className="transition-transform logo-float"
+              className="transition-transform logo-float cursor-pointer"
             >
               <img 
                 src="/logo-rodape.png" 
                 alt="Logo" 
-                className="h-32 md:h-48 w-auto"
+                className="h-40 md:h-64 w-auto"
               />
             </motion.button>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl font-medium">Advocacia especializada em Direito de Trânsito com atendimento digital e presencial em todo o Brasil.</p>
@@ -663,7 +663,7 @@ export default function Home() {
                   <li key={item.id}>
                     <button 
                       onClick={() => scrollToSection(item.id)} 
-                      className="footer-nav-link"
+                      className="footer-nav-link cursor-pointer"
                     >
                       {item.label}
                     </button>
@@ -674,18 +674,18 @@ export default function Home() {
             <div>
               <h3 className="text-xl md:text-2xl font-black mb-6 md:mb-8 text-accent uppercase tracking-widest">Contato</h3>
               <ul className="space-y-4 text-lg md:text-xl text-muted-foreground font-bold">
-                <li className="footer-link">(17) 99609-1291</li>
-                <li className="footer-link">carinaleme.adv@hotmail.com</li>
-                <li className="footer-link">Ouroeste/SP</li>
+                <li className="footer-link cursor-pointer">(17) 99609-1291</li>
+                <li className="footer-link cursor-pointer">carinaleme.adv@hotmail.com</li>
+                <li className="footer-link cursor-pointer">Ouroeste/SP</li>
               </ul>
             </div>
             <div>
               <h3 className="text-xl md:text-2xl font-black mb-6 md:mb-8 text-accent uppercase tracking-widest">Especialidades</h3>
               <ul className="space-y-4 text-lg md:text-xl text-muted-foreground font-bold">
-                <li className="footer-link">Recursos de Multas</li>
-                <li className="footer-link">Suspensão de CNH</li>
-                <li className="footer-link">Cassação de CNH</li>
-                <li className="footer-link">Crimes de Trânsito</li>
+                <li className="footer-link cursor-pointer">Recursos de Multas</li>
+                <li className="footer-link cursor-pointer">Suspensão de CNH</li>
+                <li className="footer-link cursor-pointer">Cassação de CNH</li>
+                <li className="footer-link cursor-pointer">Crimes de Trânsito</li>
               </ul>
             </div>
             <div>
@@ -695,7 +695,7 @@ export default function Home() {
                   href="https://www.instagram.com/adv.carinaleme?igsh=ejR3dnRja3BiYzUy" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="social-icon"
+                  className="social-icon cursor-pointer"
                 >
                   <Instagram />
                 </a>
@@ -703,7 +703,7 @@ export default function Home() {
                   href="https://www.facebook.com/share/1EQnA3viT3/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="social-icon"
+                  className="social-icon cursor-pointer"
                 >
                   <Facebook />
                 </a>
@@ -720,7 +720,7 @@ export default function Home() {
                   href="https://apezatomarketing.com.br" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-accent hover:underline transition-all inline-block"
+                  className="text-accent hover:underline transition-all inline-block cursor-pointer"
                   animate={{ y: [0, -5, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -736,7 +736,7 @@ export default function Home() {
                   <button
                     key={item.type}
                     onClick={() => openLegalModal(item.type)}
-                    className="px-4 py-1 border border-accent/30 rounded-full text-accent text-sm hover:bg-accent/10 transition-all"
+                    className="px-4 py-1 border border-accent/30 rounded-full text-accent text-sm hover:bg-accent/10 transition-all cursor-pointer"
                   >
                     {item.label}
                   </button>
@@ -752,7 +752,7 @@ export default function Home() {
         href={getWhatsAppLink("Olá Dra. Carina, vim através do site e gostaria de uma consultoria jurídica.")}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 pulse-ring"
+        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 pulse-ring cursor-pointer"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
@@ -784,7 +784,7 @@ export default function Home() {
             >
               <button 
                 onClick={() => setModalContent(null)}
-                className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all"
+                className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all cursor-pointer"
               >
                 <X size={24} className="text-accent" />
               </button>
@@ -794,7 +794,7 @@ export default function Home() {
               </div>
               <Button 
                 onClick={() => setModalContent(null)}
-                className="mt-10 w-full bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg font-black rounded-xl"
+                className="mt-10 w-full bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg font-black rounded-xl cursor-pointer"
               >
                 Entendido
               </Button>
