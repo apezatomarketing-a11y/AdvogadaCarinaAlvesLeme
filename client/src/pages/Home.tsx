@@ -177,7 +177,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="inicio" className="relative pt-24 pb-40 md:pt-40 md:pb-60 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(184,134,11,0.15),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(197,179,88,0.15),transparent_60%)]"></div>
         <div className="container relative z-10">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <motion.div 
@@ -283,20 +283,30 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {[
-              { title: "Recurso de Multas", icon: Gavel },
-              { title: "Suspensão da CNH", icon: Shield },
-              { title: "Cassação da CNH", icon: Scale },
-              { title: "Defesa Prévia", icon: FileCheck },
-              { title: "Crimes de Trânsito", icon: AlertTriangle },
-              { title: "Transferência de Pontos", icon: Users },
+              { title: "Recurso de Multas", icon: Gavel, btn: "Recorrer Multa" },
+              { title: "Suspensão da CNH", icon: Shield, btn: "Evitar Suspensão" },
+              { title: "Cassação da CNH", icon: Scale, btn: "Reverter Cassação" },
+              { title: "Defesa Prévia", icon: FileCheck, btn: "Iniciar Defesa" },
+              { title: "Crimes de Trânsito", icon: AlertTriangle, btn: "Defesa Criminal" },
+              { title: "Transferência de Pontos", icon: Users, btn: "Transferir Pontos" },
             ].map((service, i) => (
-              <motion.div key={i} variants={fadeInUp} className="glass p-10 rounded-[2rem] group hover:bg-accent/10 transition-all duration-700 relative overflow-hidden">
+              <motion.div 
+                key={i} 
+                variants={fadeInUp} 
+                className="glass p-10 rounded-[2rem] group hover:bg-accent/10 transition-all duration-700 relative overflow-hidden"
+                whileHover={{ y: -15 }}
+              >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-bl-full -mr-10 -mt-10 group-hover:bg-accent/20 transition-all duration-700"></div>
-                <service.icon className="w-16 h-16 text-accent mb-8 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" />
+                <motion.div
+                  whileHover={{ scale: 1.2, rotate: 15 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <service.icon className="w-16 h-16 text-accent mb-8 transition-all duration-500" />
+                </motion.div>
                 <h3 className="text-3xl font-black mb-6">{service.title}</h3>
                 <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
-                  <Button variant="link" className="text-accent p-0 h-auto text-xl font-black hover:translate-x-4 transition-all duration-500">
-                    Fale comigo! →
+                  <Button className="bg-accent/10 hover:bg-accent text-accent hover:text-accent-foreground neon-button skeu-button font-black w-full h-14 text-lg">
+                    {service.btn}
                   </Button>
                 </a>
               </motion.div>
@@ -350,7 +360,7 @@ export default function Home() {
                     "Atendimento Digital e Presencial"
                   ].map((item, i) => (
                     <li key={i} className="flex items-center gap-5">
-                      <div className="w-4 h-4 bg-accent rounded-full shadow-[0_0_15px_rgba(184,134,11,0.8)]"></div>
+                      <div className="w-4 h-4 bg-accent rounded-full shadow-[0_0_15px_rgba(197,179,88,0.8)]"></div>
                       {item}
                     </li>
                   ))}
@@ -482,6 +492,33 @@ export default function Home() {
               </form>
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Location Section with Google Maps */}
+      <section className="py-32 md:py-48">
+        <div className="container">
+          <motion.div className="text-center mb-20" {...fadeInUp}>
+            <h2 className="text-5xl md:text-8xl font-black mb-8 gradient-text">Localização</h2>
+            <p className="text-2xl text-muted-foreground font-medium">Visite nosso escritório ou agende uma consulta presencial.</p>
+          </motion.div>
+          
+          <motion.div 
+            className="glass p-4 rounded-[3rem] overflow-hidden shadow-2xl h-[500px] relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.5623636363636!2d-50.0000000!3d-20.0000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDAwJzAwLjAiUyA1MMKwMDAnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1710547200000!5m2!1spt-BR!2sbr&q=AV+DOS+BANDEIRANTES,+2170,+OUROESTE+-+SP" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0, borderRadius: '2.5rem' }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </motion.div>
         </div>
       </section>
 
