@@ -78,7 +78,7 @@ export default function Home() {
         <div className="container flex items-center justify-between h-16">
           <a href="#inicio" className="flex items-center gap-2 hover-glow">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663442181488/ad75sJfkR7hdVvawt9JjLn/Logotipo Menu_a3902f06.png"
+              src="/logo-menu.png"
               alt="Advocacia Carina Alves Leme"
               className="h-10 w-auto"
             />
@@ -232,7 +232,7 @@ export default function Home() {
             <div className="relative slide-in-right">
               <div className="glass p-8 hover-lift">
                 <img
-                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663442181488/ad75sJfkR7hdVvawt9JjLn/foto inicio_347d4498.jpeg"
+                  src="/foto-inicio.jpeg"
                   alt="Advocacia"
                   className="rounded-lg w-full h-auto"
                 />
@@ -373,7 +373,7 @@ export default function Home() {
             <div className="slide-in-left">
               <div className="glass p-8 hover-lift">
                 <img
-                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663442181488/ad75sJfkR7hdVvawt9JjLn/foto sobre_6cbf6f1d.jpeg"
+                  src="/foto-sobre.jpeg"
                   alt="Dra. Carina Leme"
                   className="rounded-lg w-full h-auto"
                 />
@@ -630,7 +630,7 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663442181488/ad75sJfkR7hdVvawt9JjLn/Logotipo Rodape_18c3040b.png"
+                src="/logo-rodape.png"
                 alt="Advocacia Carina Alves Leme"
                 className="h-12 w-auto mb-4"
               />
