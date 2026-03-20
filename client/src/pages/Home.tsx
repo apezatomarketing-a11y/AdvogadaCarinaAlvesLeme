@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Clock, Shield, BarChart3, Users, Phone, Mail, MapPin, Menu, X, Moon, Sun, Scale, Gavel, FileCheck, AlertTriangle, UserCheck, Instagram, Facebook } from "lucide-react";
+import { Clock, Shield, BarChart3, Users, Phone, Mail, MapPin, Menu, X, Moon, Sun, Scale, Gavel, FileCheck, AlertTriangle, UserCheck, Instagram, Facebook, Baby, Activity, CalendarCheck } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -352,7 +352,7 @@ export default function Home() {
           >
             <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 md:mb-8 gradient-text">Nossos Serviços</h2>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-medium">
-              Atuação especializada em todas as áreas do Direito de Trânsito com foco em resultados de elite.
+              Atuação especializada em Direito de Trânsito e Previdenciário com foco em resultados de elite.
             </p>
           </motion.div>
 
@@ -364,10 +364,14 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {[
+              { title: "Auxílio Maternidade", icon: Baby, btn: "Solicitar Benefício", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como solicitar o Auxílio Maternidade." },
+              { title: "Aposentadoria por Incapacidade Temporária (Auxílio Doença)", icon: Activity, btn: "Dar Entrada no Benefício", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como dar entrada na Aposentadoria por Incapacidade Temporária (Auxílio Doença)." },
+              { title: "Aposentadoria", icon: CalendarCheck, btn: "Planejar Aposentadoria", msg: "Olá Dra. Carina, vim através do site e gostaria de realizar um planejamento de aposentadoria." },
+              { title: "Auxílio Acidente", icon: AlertTriangle, btn: "Solicitar Auxílio", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como solicitar o Auxílio Acidente." },
               { title: "Recurso de Multas", icon: Gavel, btn: "Recorrer Multa", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como funciona o processo de recurso de multas." },
               { title: "Suspensão da CNH", icon: Shield, btn: "Evitar Suspensão", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como funciona o processo de suspensão da CNH." },
               { title: "Cassação da CNH", icon: Scale, btn: "Reverter Cassação", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como funciona o processo de cassação da CNH." },
-              { title: "Defesa Prévia", icon: FileCheck, btn: "Iniciar Defesa", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como funciona a defesa prévia em processos administrativos." },
+              { title: "Defesa Prévia", icon: FileCheck, btn: "Iniciar Defesa", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre como a defesa prévia em processos administrativos." },
               { title: "Crimes de Trânsito", icon: AlertTriangle, btn: "Defesa Criminal", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre a defesa jurídica em casos de crimes de trânsito." },
               { title: "Transferência de Pontos", icon: Users, btn: "Transferir Pontos", msg: "Olá Dra. Carina, vim através do site e gostaria de saber mais sobre a possibilidade de transferência de pontos na CNH." },
             ].map((service, i) => (
@@ -455,12 +459,12 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="text-5xl md:text-7xl lg:text-8xl font-black gradient-text">Dra. Carina Leme</h2>
-              <p className="text-2xl md:text-3xl font-black text-accent tracking-widest">OAB/SP 472.156</p>
+              <p className="text-2xl md:text-3xl font-black text-accent">OAB/SP 410.172</p>
               <div className="space-y-6 text-lg md:text-xl text-muted-foreground font-medium">
                 <p>Graduada em Direito com especialização em Direito de Trânsito, com centenas de casos solucionados com sucesso em todo o território nacional.</p>
                 <ul className="space-y-4">
                   {[
-                    "Especialista em Recursos de Multas",
+                    "Especialista em Trânsito e Previdenciário",
                     "Defesa em Suspensão e Cassação de CNH",
                     "Atuação em Crimes de Trânsito",
                     "Atendimento Digital e Presencial"
@@ -647,7 +651,7 @@ export default function Home() {
                 className="h-40 md:h-64 w-auto"
               />
             </motion.button>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl font-medium">Advocacia especializada em Direito de Trânsito com atendimento digital e presencial em todo o Brasil.</p>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl font-medium">Advocacia especializada em Direito de Trânsito e Previdenciário com atendimento digital e presencial em todo o Brasil.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 mb-20 text-center md:text-left">
@@ -685,7 +689,7 @@ export default function Home() {
                 <li className="footer-link cursor-pointer">Recursos de Multas</li>
                 <li className="footer-link cursor-pointer">Suspensão de CNH</li>
                 <li className="footer-link cursor-pointer">Cassação de CNH</li>
-                <li className="footer-link cursor-pointer">Crimes de Trânsito</li>
+                <li className="footer-link cursor-pointer">Direito Previdenciário</li>
               </ul>
             </div>
             <div>
@@ -716,92 +720,46 @@ export default function Home() {
             <div className="flex flex-col items-center gap-4">
               <p>
                 Desenvolvido por{" "}
-                <motion.a 
-                  href="https://apezatomarketing.com.br" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-accent hover:underline transition-all inline-block cursor-pointer"
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                >
+                <a href="https://apezatomarketing.com.br" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                   Apezato Marketing
-                </motion.a>
+                </a>
               </p>
-              <div className="flex flex-wrap justify-center gap-4 mt-2">
-                {[
-                  { label: "Termos de Uso", type: 'terms' as const },
-                  { label: "Política de Privacidade", type: 'privacy' as const },
-                  { label: "Política de Cookies", type: 'cookies' as const }
-                ].map((item) => (
-                  <button
-                    key={item.type}
-                    onClick={() => openLegalModal(item.type)}
-                    className="px-4 py-1 border border-accent/30 rounded-full text-accent text-sm hover:bg-accent/10 transition-all cursor-pointer"
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
         </div>
+
+        {/* Legal Modal */}
+        <AnimatePresence>
+          {modalContent && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6">
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setModalContent(null)}
+                className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+              />
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative w-full max-w-2xl glass p-8 md:p-12 rounded-[2rem] shadow-2xl border border-white/10 overflow-y-auto max-h-[80vh]"
+              >
+                <button 
+                  onClick={() => setModalContent(null)}
+                  className="absolute top-6 right-6 p-2 hover:bg-white/5 rounded-full transition-colors"
+                >
+                  <X size={24} />
+                </button>
+                <h2 className="text-3xl md:text-4xl font-black mb-8 gradient-text">{modalContent.title}</h2>
+                <div className="text-lg md:text-xl text-muted-foreground font-medium leading-relaxed whitespace-pre-wrap">
+                  {modalContent.content}
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
       </footer>
-
-      {/* WhatsApp Floating Button */}
-      <motion.a
-        href={getWhatsAppLink("Olá Dra. Carina, vim através do site e gostaria de uma consultoria jurídica.")}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 pulse-ring cursor-pointer"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <div className="w-16 h-16 md:w-20 md:h-20 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl border-2 border-white/20 overflow-hidden">
-          <img 
-            src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-            alt="WhatsApp" 
-            className="w-10 h-10 md:w-12 md:h-12"
-          />
-        </div>
-      </motion.a>
-
-      {/* Legal Modal */}
-      <AnimatePresence>
-        {modalContent && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-black/60 backdrop-blur-sm"
-            onClick={() => setModalContent(null)}
-          >
-            <motion.div 
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="glass-dark max-w-2xl w-full max-h-[80vh] overflow-y-auto p-8 md:p-12 rounded-[2rem] border border-white/20 shadow-2xl relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button 
-                onClick={() => setModalContent(null)}
-                className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-all cursor-pointer"
-              >
-                <X size={24} className="text-accent" />
-              </button>
-              <h2 className="text-3xl md:text-4xl font-black mb-8 text-accent uppercase tracking-tighter">{modalContent.title}</h2>
-              <div className="text-lg md:text-xl text-white/80 font-medium leading-relaxed whitespace-pre-line">
-                {modalContent.content}
-              </div>
-              <Button 
-                onClick={() => setModalContent(null)}
-                className="mt-10 w-full bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg font-black rounded-xl cursor-pointer"
-              >
-                Entendido
-              </Button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
